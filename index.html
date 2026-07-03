@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱玩平台推荐中转站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        danger: '#EF4444',
+                        dark: '#1E293B',
+                        'dark-light': '#334155',
+                        'apple-blue': '#0071E3'
+                    },
+                    fontFamily: {
+                        gaming: ['"Press Start 2P"', 'cursive', 'sans-serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            }
+            .text-glow {
+                text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+            }
+            .bg-gradient-animated {
+                background-size: 400% 400%;
+                animation: gradientShift 15s ease infinite;
+            }
+            @keyframes gradientShift {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+            }
+            .particle {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.7;
+                animation: float 8s infinite ease-in-out;
+            }
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(180deg); }
+            }
+            .link-animated {
+                position: relative;
+                overflow: hidden;
+            }
+            .link-animated::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: currentColor;
+                transition: width 0.3s ease;
+            }
+            .link-animated:hover::after {
+                width: 100%;
+            }
+            .game-badge {
+                transform: rotate(-2deg);
+                transition: transform 0.3s ease;
+            }
+            .game-badge:hover {
+                transform: rotate(0deg) scale(1.05);
+            }
+            .highlight-box {
+                position: relative;
+                overflow: hidden;
+            }
+            .highlight-box::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+                animation: shine 3s infinite;
+            }
+            @keyframes shine {
+                100% {
+                    left: 100%;
+                }
+            }
+            .game-tag {
+                display: inline-block;
+                transition: all 0.2s ease;
+            }
+            .game-tag:hover {
+                transform: scale(1.1);
+                background-color: rgba(245, 158, 11, 0.3);
+            }
+            .step-highlight {
+                background-color: rgba(255, 255, 255, 0.1);
+                padding: 0 4px;
+                border-radius: 3px;
+            }
+            .celebration-text {
+                animation: bounce 2s infinite;
+            }
+            @keyframes bounce {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+            /* 弹窗样式 */
+            .welcome-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                opacity: 0;
+                animation: fadeIn 0.5s forwards;
+            }
+            .modal-content {
+                background-color: #1E293B;
+                padding: 2rem;
+                border-radius: 1rem;
+                text-align: center;
+                border: 2px solid #3B82F6;
+                max-width: 90%;
+                width: 400px;
+                transform: scale(0.8);
+                animation: scaleUp 0.5s 0.2s forwards;
+            }
+            @keyframes fadeIn {
+                to { opacity: 1; }
+            }
+            @keyframes scaleUp {
+                to { transform: scale(1); }
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body class="bg-dark text-gray-100 min-h-screen relative overflow-x-hidden">
+    <!-- 欢迎弹窗 -->
+    <div id="welcomeModal" class="welcome-modal">
+        <div class="modal-content">
+            <h3 class="text-3xl font-gaming text-secondary mb-6">爱玩平台推荐中转站</h3>
+            <p class="text-3xl font-bold mb-2 celebration-text">
+                    <i class="text-lg md:text-xl"></i>了解此封面内容
+                </p>
+                <p class="text-3xl font-bold mb-2 celebration-text">
+                    <i class="text-lg md:text-xl"></i>点击黄色框进入下载页面
+                </p>
+            <p class="text-yellow-500 text-xl md:text-5x2 mb-2 celebration-text">
+                    <i class="fa fa-star mr-2"></i>本网站所有APP都有备案纯绿色平台放心下载体验
+                </p>
+                <p class="text-yellow-500 text-xl md:text-5x2 mb-2 celebration-text">
+                    <i class="fa fa-star mr-2"></i>每款APP都有真机推币、街机、游艺机、
+                </p>
+                
+                <p class="text-yellow-500 text-xl md:text-5x2 mb-2 celebration-text">
+                    <i class="fa fa-star mr-2"></i>下载安装完返回此网页查看领币教程哦
+                </p>
+    
+    <button id="closeModal" class="bg-accent hover:bg-accent/80 text-dark font-bold py-2 px-6 rounded-lg transition-all transform hover:scale-105">
+                点击进入下载页面
+                </p>【每个框框包含领币教程】</h3>
+            <!-- 替换为街机风暴宣传 -->
+            <div class="bg-dark-light rounded-lg p-4 mb-6 border border-secondary/50">
+                <p class="text-amber-400 font-medium mb-2 celebration-text">
+                    
+                
+                <p class="text-sm text-red-500">
+                    温馨提醒：<span class="text-1.5xl font-bold">App如掉签进不了请卸载重新下载安装</span>
+                </p>
+            </div>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 网格背景 -->
+    <div class="fixed inset-0 bg-grid opacity-30 z-0"></div>
+   
+    
+    <!-- 动态背景粒子 -->
+    <div id="particles-container" class="fixed inset-0 z-0 opacity-30"></div>
+    
+    <!-- 动态光效 -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] z-0 animate-pulse"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[100px] z-0 animate-pulse" style="animation-delay: 1s;"></div>
+    
+    <!-- 渐变背景覆盖 -->
+    
+    <div class="container mx-auto px-4 py-8 relative z-10 max-w-5xl">
+        
+        <!-- 标题区域 -->
+        <header class="text-center mb-12 mt-6">
+            <h1 class="text-[clamp(1.8rem,5vw,3rem)] font-gaming text-primary text-glow mb-4 animate-pulse">
+                爱玩平台推荐中转站
+            </h1>
+            </header>
+            <p class="text-3xl font-bold mb-2 celebration-text">
+                    <i class="fa fa-star mr-1"></i>2款App
+                </p>
+                </header>
+        <p class="text-3xl font-bold mb-2 celebration-text">
+                    <i class="fa fa-star mr-1"></i>可收藏持续更新新款等福利
+                </p>
+        </header>
+        <p class="text-3xl font-bold mb-2 celebration-text">
+                    <i class="fa fa-star mr-1"></i>下载框框内都有领币码领币
+                </p>
+        </header>
+     
+        <!-- 游戏卡片容器 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            
+            
+            <!--大鱼街机 -->
+            <div class="bg-dark-light rounded-xl p-6 shadow-lg shadow-primary/20 card-hover border border-primary/30">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-secondary flex items-center">
+                        <i class="fa fa-fire mr-2"></i>大鱼街机
+                    </h2>
+                    <span class="bg-green-600/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">机器种类多</span>
+                </div>
+                <p class="mb-2"><span class="text-gray-400">邀请码：</span>
+                    <span class="text-danger font-bold text-xl tracking-wider">0830领1w小铁片</span>
+                </p>
+                <p class="text-amber-400 font-medium mb-3"><i class="fa fa-exclamation-circle mr-1"></i>1w小铁片福利48小时内有效</p>
+                <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                    领取步骤：进入游戏首页-点击头像-点邀请好友-输入邀请码0830获取1w小铁片
+                </p>
+                <a href="https://yc1415.cn/install.html?channel=137&logintype=1&inviteid=185070830/#/" target="_blank" class="link-animated block bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-4 py-2 rounded-lg text-center transition-all">
+                    <i class="fa fa-download mr-1"></i> 安卓苹果下载
+                </a>
+            </div>
+            
+            <!-- 魔咖潮玩-->
+            <div class="bg-dark-light rounded-xl p-6 shadow-lg shadow-primary/20 card-hover border border-primary/30">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-secondary flex items-center">
+                        <i class="fa fa-fire mr-2"></i>魔咖潮玩
+                    </h2>
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-sm font-medium">机器多</span>
+                </div>
+                <p class="mb-2"><span class="text-gray-400">邀请码：</span>
+                    <span class="text-danger font-bold text-xl tracking-wider">115599领5000</span>
+                </p>
+                <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                    魔咖电玩这个走的渠道是比较正规的！！ 充值都是要走对公账户的 按照要求比较严的，要求手机号，绑定的身份证号要一致！！！（备案信息见下方图片，需要查询证明的见https://beian.miit.gov.cn/搜：河南羽墨网络科技有限公司（仅作合法证明请勿外传否则后果自负！）具体请参见群公告
+                </p>
+                <p class="text-amber-400 font-medium mb-3"><i class="fa fa-exclamation-circle mr-1"></i>24小时内有效/不填邀请码实名5000，首页福利5000，共得15000小铁片</p>
+                <p class="text-amber-400 font-medium mb-3"><i class="fa fa-gift mr-1"></i>  </p>
+                <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+     
+                </p>
+                <a href="https://dx2q.ttapk.cn/mt4nkg"_blank" class="link-animated block bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-4 py-2 rounded-lg text-center transition-all">
+                    <i class="fa fa-download mr-1"></i> 安卓苹果下载
+                </a>
+            </div>
+<div class="bg-dark-light rounded-xl p-6 shadow-lg shadow-secondary/20 border border-secondary/30 mb-12">
+            <h2 class="text-2xl font-bold text-secondary mb-6 flex items-center">
+                <i class="fa fa-lightbulb-o mr-2"></i>温馨提示：
+            </h2>
+        
+            <div class="space-y-4">
+                    <ol class="list-decimal list-inside">
+                        
+                        <li class="rounded-xl border-2 border-danger relative mb-6 p-4 bg-dark/100 rounded-lg border-l-10 border-accent game-tag  text-accent rounded-full">本网站仅提供游玩无不良引导
+</li>
+                        <li class="rounded-xl border-2 border-danger relative mb-6 p-4 bg-dark/100 rounded-lg border-l-10 border-accent game-tag  text-accent rounded-full">每款App都有领币码领币 没绑定没金币</li>
+                        <li class="rounded-xl border-2 border-danger relative mb-6 p-4 bg-dark/100 rounded-lg border-l-10 border-accent game-tag  text-accent rounded-full">部分App"苹果用户"需要信任（设置→通用→VPN与设备管理→信任即可）
+                        安卓（鸿蒙系统需要在，设置中搜索纯净模式，关闭纯净模式即可安装下载）！</li>
+                        <li class="mb-3 p-4 bg-dark/50 rounded-lg border-l-4 border-accent   text-sm">App如掉签进不了请卸载重新下载安装</li>
+                        <li class="mb-3 p-4 bg-dark/50 rounded-lg border-l-4 border-accent text-sm">App有超级马戏团、大魔术师、超级魔方、塔塔岛、金币牛魔王、疯狂魔鬼城、捕鱼捕鸟捕虫、山海经、宝石爆爆乐、水浒传、宙斯、雷神、财神、三国等等游戏，种类繁多、应有尽有。</li>
+                        <li class="mb-3 p-4 bg-dark/50 rounded-lg border-l-4 border-accent text-sm">所有App都经过文审、合法合规、无广告无病毒，本人亲测有效，可放心下载安装。</li>
+                        <li class="mb-3 p-4 bg-dark/50 rounded-lg border-l-4 border-accent text-sm">App前排是免费区，后排vip区，体验请选择前排位置，如果没位置请等待观看。</li>
+                        <li class="mb-3 p-4 bg-dark/50 rounded-lg border-l-4 border-accent text-sm ">App如掉签进不了请卸载重新下载安装</li>
+                    </ol>
+                </div>
+        </div>
+       
+    <script>
+        // 弹窗控制
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('welcomeModal');
+            const closeBtn = document.getElementById('closeModal');
+            
+            // 显示弹窗
+            modal.style.display = 'flex';
+            
+            // 点击关闭按钮隐藏弹窗
+            closeBtn.addEventListener('click', function() {
+                modal.style.opacity = '0';
+                modal.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 500);
+            });
+        });
+        
+        // 创建动态背景粒子
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机大小和位置
+                const size = Math.random() * 10 + 2;
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                
+                // 随机颜色
+                const colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#0071E3'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // 应用样式
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}%`;
+                particle.style.top = `${y}%`;
+                particle.style.backgroundColor = color;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 页面加载完成后创建粒子
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+</html>
